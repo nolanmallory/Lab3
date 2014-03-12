@@ -97,10 +97,20 @@ signal ClockBus_sig : STD_LOGIC_VECTOR (26 downto 0);
 			reset : IN std_logic;
 			stop : IN std_logic;
 			up_down : IN std_logic;          
-			floor : OUT std_logic_vector( downto 0)
+			floor : OUT std_logic_vector(3 downto 0)
 			);
 		END COMPONENT;
 
+--	COMPONENT MealyElevatorController_Shell
+--	PORT(
+--		clk : IN std_logic;
+--		reset : IN std_logic;
+--		stop : IN std_logic;
+--		up_down : IN std_logic;          
+--		floor : OUT std_logic_vector(3 downto 0);
+--		nextfloor : OUT std_logic_vector(3 downto 0)
+--		);
+--	END COMPONENT;
 
 --------------------------------------------------------------------------------------
 --Insert any required signal declarations below
@@ -133,8 +143,29 @@ LED <= CLOCKBUS_SIG(26 DOWNTO 19);
 --		  Example: if you are not using 7-seg display #3 set nibble3 to "0000"
 --------------------------------------------------------------------------------------
 --2	3	5	7	11	13	17	19	
-nibble0 <= EleFloor;
-nibble1 <= "0000":
+--nibble0 <= EleFloor;
+--nibble1 <= "0000";
+
+nibble0 <= "0010" when (EleFloor = "0001") else
+							"0011" when (EleFloor = "0010") else
+							"0101" when (EleFloor = "0011") else
+							"0111" when (EleFloor = "0100") else
+							"0001" when (EleFloor = "0101") else
+							"0011" when (EleFloor = "0110") else
+							"0111" when (EleFloor = "0111") else
+							"1001" when (EleFloor = "1000") else
+							"0010";
+							
+nibble1 <= "0000" when (EleFloor = "0001") else
+							"0000" when (EleFloor = "0010") else
+							"0000" when (EleFloor = "0011") else
+							"0000" when (EleFloor = "0100") else
+							"0001" when (EleFloor = "0101") else
+							"0001" when (EleFloor = "0110") else
+							"0001" when (EleFloor = "0111") else
+							"0001" when (EleFloor = "1000") else
+							"0000";							
+							
 nibble2 <= "0000";
 nibble3 <= "0000";
 
@@ -189,4 +220,14 @@ Inst_MooreElevatorController_Shell: MooreElevatorController_Shell PORT MAP(
 		floor => EleFloor
 		);
 
+
+--	Inst_MealyElevatorController_Shell: MealyElevatorController_Shell PORT MAP(
+--		clk => ClockBus_sig(25),
+--		reset => btn(3),
+--		stop => switch(1),
+--		up_down => switch(0),
+--		floor => EleFloor
+--		);
+		
+	
 end Behavioral;
