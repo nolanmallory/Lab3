@@ -12,7 +12,7 @@ This code is unneccesary to look for a rising edge because there is already a fu
 ##Good Code
 ```if rising_edge((clk)) then```
 
-Rising_egde is the same as the bad code abovejust much cleaner. It is better to use a pre defined word rather than creating code to do the same thing.
+Rising_egde is the same as the bad code above just much cleaner. It is better to use a pre defined word rather than creating code to do the same thing.
 
 ##Full B Fuctionality
 <a href="https://www.youtube.com/watch?v=DMD15DSQARE" target="_blank"><img src="http://img.youtube.com/vi/MZO9sBdiirI/0.jpg" 
