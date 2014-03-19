@@ -1,5 +1,16 @@
 Lab3
 ====
+#Functionality
+
+-Basic Moore
+
+-Basic Mealy
+
+-More Floors
+
+-Change Inputs
+
+
 ##Schematic
 ![alt text][logo11]
 
